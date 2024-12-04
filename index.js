@@ -5,6 +5,8 @@ import globalExceptionHandler from './src/core/config/globalException.js';
 import logger from './src/core/config/logger.js';
 import "dotenv/config"
 
+import {exampleRoutes} from './src/routes/routes.js'
+
 const app = express();
 const PORT = (() => {
     const env = process.env.ENV;
@@ -25,6 +27,8 @@ connectDB()
         logger.error(`Database connection failed: ${err.message}`);
     });
 app.use(globalExceptionHandler);
+
+app.use('/v1', exampleRoutes)
 
 app.listen(PORT, () => {
     logger.info(`Server is running at port ${PORT}`);
